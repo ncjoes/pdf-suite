@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b385c5eb708220760b9409d647e7687f",
+    "hash": "bc5662b2f19d1be360d0f2898daacefd",
     "content-hash": "c478bf3b22cf07036c5b979a014b5d87",
     "packages": [
         {
@@ -274,12 +274,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ncjoes/PHP-Poppler.git",
-                "reference": "9b8a9a2ce43e956aee231ee2296cbdd39f3aa37c"
+                "reference": "3177287fcf10037ba72a7f82498d5f9c190bef9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ncjoes/PHP-Poppler/zipball/9b8a9a2ce43e956aee231ee2296cbdd39f3aa37c",
-                "reference": "9b8a9a2ce43e956aee231ee2296cbdd39f3aa37c",
+                "url": "https://api.github.com/repos/ncjoes/PHP-Poppler/zipball/3177287fcf10037ba72a7f82498d5f9c190bef9a",
+                "reference": "3177287fcf10037ba72a7f82498d5f9c190bef9a",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
                     "email": "jc.nwobodo@gmail.com"
                 }
             ],
-            "description": "PHP wrapper for Poppler utils",
+            "description": "Complete, Comprehensive and Flexible PHP wrapper for Poppler-utils",
             "keywords": [
                 "PDF Convert",
                 "PDF to HTML",
@@ -317,9 +317,11 @@
                 "PDF to PNG",
                 "PDF to SVG",
                 "PHP-PDF",
-                "Poppler-utils"
+                "PHP-Poppler",
+                "Poppler-utils",
+                "pdf"
             ],
-            "time": "2016-10-14 07:06:54"
+            "time": "2016-10-14 17:11:04"
         },
         {
             "name": "paragonie/random_compat",
