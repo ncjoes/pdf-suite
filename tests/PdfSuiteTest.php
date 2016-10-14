@@ -22,7 +22,7 @@ class PdfSuiteTest extends PHPUnit_Framework_TestCase
     {
         $file = realpath(dirname(__FILE__).'\sources\test1.pdf');
         $pdf_suite = new PdfSuite($file);
-        $pdf_info = $pdf_suite->getInfo();
+        $pdf_info = $pdf_suite->getPdfInfo();
 
         $this->assertArrayHasKey('pages', $pdf_info->getInfo());
     }
@@ -32,7 +32,7 @@ class PdfSuiteTest extends PHPUnit_Framework_TestCase
         $file = dirname(__FILE__).'\sources\test1.pdf';
         $pdf_suite = new PdfSuite($file);
 
-        $pdf_info = $pdf_suite->getInfo();
+        $pdf_info = $pdf_suite->getPdfInfo();
 
         $info = [
             'Authors'           => $pdf_info->getAuthors(),

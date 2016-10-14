@@ -10,6 +10,16 @@
 namespace NcJoes\PdfSuite;
 
 use NcJoes\PdfSuite\Exceptions\FileNotFoundException;
+use NcJoes\PdfSuite\Wrappers\PdfInfo as PdfInfoWrapper;
+use NcJoes\PdfSuite\Wrappers\PdfJoin as PdfJoiner;
+use NcJoes\PdfSuite\Wrappers\PdfSplit as PdfSplitter;
+use NcJoes\PdfSuite\Wrappers\PdfToEps as PdfToEPSConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToHtml as PdfToHtmlConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToJpeg as PdfToJPEGConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToPng as PdfToPNGConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToPs as PdfToPSConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToSvg as PdfToSvgConverter;
+use NcJoes\PdfSuite\Wrappers\PdfToTiff as PdfToTIFFConverter;
 use NcJoes\PhpPoppler\Constants as C;
 use NcJoes\PhpPoppler\Helpers as H;
 use NcJoes\PhpPoppler\PdfDetach;
@@ -23,7 +33,6 @@ use NcJoes\PhpPoppler\PdfToPpm;
 use NcJoes\PhpPoppler\PdfToPs;
 use NcJoes\PhpPoppler\PdfToText;
 use NcJoes\PhpPoppler\PdfUnite;
-use NcJoes\PdfSuite\Wrappers\PdfInfo as PdfInfoWrapper;
 
 class PdfSuite
 {
@@ -89,14 +98,78 @@ class PdfSuite
         return new PdfInfoWrapper($pdfInfoUtil);
     }
 
+    public function getPdfJoiner()
+    {
+        $pdfUniteUtil = $this->getUtil(C::PDF_UNITE);
+
+        return new PdfJoiner($pdfUniteUtil);
+    }
+
+    public function getPdfSplitter()
+    {
+        $pdfSeparateUtil = $this->getUtil(C::PDF_SEPARATE);
+
+        return new PdfSplitter($pdfSeparateUtil);
+    }
+
+    public function getPdfToEpsConverter()
+    {
+        $pdfToCairoUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToEPSConverter($pdfToCairoUtil);
+    }
+
+    public function getPdfToHtmlConverter()
+    {
+        $pdfToHtmlUtil = $this->getUtil(C::PDF_TO_HTML);
+
+        return new PdfToHtmlConverter($pdfToHtmlUtil);
+    }
+
+    public function getPdfToJpegConverter()
+    {
+        $pdfToCairoUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToJPEGConverter($pdfToCairoUtil);
+    }
+
+    public function getPdfToPngConverter()
+    {
+        $pdfToCairoUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToPNGConverter($pdfToCairoUtil);
+    }
+
+    public function getPdfToPsConverter()
+    {
+        $pdfToCairoUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToPSConverter($pdfToCairoUtil);
+    }
+
+    public function getPdfToSvgConverter()
+    {
+        $pdfToSvgUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToSvgConverter($pdfToSvgUtil);
+    }
+
+    public function getPdfToTiffConverter()
+    {
+        $pdfToCairoUtil = $this->getUtil(C::PDF_TO_CAIRO);
+
+        return new PdfToTIFFConverter($pdfToCairoUtil);
+    }
+
     private function getUtil($name)
     {
-        if (!array_key_exists($name, $this->utils)){
+        if (!array_key_exists($name, $this->utils)) {
             $util_map = $this->utilMap();
-            $util = (new $util_map[$name])->open($this->source_pdf);
-            $this->utils[$name] = $util;
+            $util = (new $util_map[ $name ])->open($this->source_pdf);
+            $this->utils[ $name ] = $util;
         }
-        return $this->utils[$name];
+
+        return $this->utils[ $name ];
     }
 
     private function utilMap()
