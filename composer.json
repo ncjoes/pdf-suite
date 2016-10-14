@@ -1,7 +1,7 @@
 {
   "name": "ncjoes/pdf-suite",
-  "description": "PDF utilities for content conversion and extraction based on PHP-Poppler",
-  "keywords": ["PDF Converter", "PHP-PDF", "PDF to HTML", "PDF to SVG", "PDF to JPG", "PDF to PNG", "Poppler-utils"],
+  "description": "PDF package for content conversion and extraction based on NcJoes/PHP-Poppler",
+  "keywords": ["Poppler-utils", "PDF Converter", "PDF", "PDF to HTML", "PDF to SVG", "PDF to JPG", "PDF to PNG", "PDF to PostScript"],
   "license": "MIT",
   "authors": [
     {
