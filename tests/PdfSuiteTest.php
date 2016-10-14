@@ -16,43 +16,52 @@ class PdfSuiteTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
         Config::setBinDirectory(__DIR__.'/../vendor/bin/poppler');
+        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
     }
 
     public function testGetInfo()
     {
-        $file = realpath(dirname(__FILE__).'\sources\test1.pdf');
+        $file = __DIR__.'/sources/test1.pdf';
         $pdf_suite = new PdfSuite($file);
         $pdf_info = $pdf_suite->getPdfInfo();
 
         $this->assertArrayHasKey('pages', $pdf_info->getInfo());
     }
 
-    public function testGetters()
+    public function testPdfToJpegConverter()
     {
         $file = dirname(__FILE__).'\sources\test1.pdf';
         $pdf_suite = new PdfSuite($file);
+        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
 
-        $pdf_info = $pdf_suite->getPdfInfo();
+        $pdf_suite->getPdfToJpegConverter()->convert();
+    }
 
-        $info = [
-            'Authors'           => $pdf_info->getAuthors(),
-            'Creation Date'     => $pdf_info->getCreationDate(),
-            'Creator'           => $pdf_info->getCreator(),
-            'File Size'         => $pdf_info->getFileSize(),
-            'Modification Date' => $pdf_info->getModificationDate(),
-            'Num. of Pages'     => $pdf_info->getNumOfPages(),
-            'Page Rot'          => $pdf_info->getPageRot(),
-            'Page Size'         => $pdf_info->getPageSize(),
-            'PDF Version'       => $pdf_info->getPdfVersion(),
-            'Producer'          => $pdf_info->getProducer(),
-            'Is Tagged?'        => (int)$pdf_info->isTagged(),
-            'Is Optimized'      => (int)$pdf_info->isOptimized(),
-            'Page Width'        => $pdf_info->getPageWidth(),
-            'Page Height'       => $pdf_info->getPageHeight(),
-            'Page Size Unit'    => $pdf_info->getPageSizeUnit(),
-        ];
+    public function testPdfToPngConverter()
+    {
+        $file = dirname(__FILE__).'\sources\test1.pdf';
+        $pdf_suite = new PdfSuite($file);
+        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
 
-        print_r($info);
+        $pdf_suite->getPdfToPngConverter()->convert();
+    }
+
+    public function testPdfToPsConverter()
+    {
+        $file = dirname(__FILE__).'\sources\test1.pdf';
+        $pdf_suite = new PdfSuite($file);
+        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
+
+        $pdf_suite->getPdfToPsConverter()->convert();
+    }
+
+    public function testPdfToSvgConverter()
+    {
+        $file = dirname(__FILE__).'\sources\test1.pdf';
+        $pdf_suite = new PdfSuite($file);
+        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
+
+        $pdf_suite->getPdfToSvgConverter()->convert();
     }
 
 }

@@ -9,10 +9,16 @@
 
 namespace NcJoes\PdfSuite\Wrappers;
 
+use NcJoes\PhpPoppler\PdfToCairo as PdfToCairoUtil;
+
 class PdfToPs extends PdfToCairo
 {
     public function convert()
     {
-        // TODO: Implement convert() method.
+        /**
+         * @var $util PdfToCairoUtil
+         */
+        $util = $this->util;
+        $util->generatePS();
     }
 }
