@@ -1,0 +1,28 @@
+{
+  "name": "ncjoes/pdf-suite",
+  "description": "PDF utilities for content conversion and extraction based on PHP-Poppler",
+  "keywords": ["PDF Converter", "PHP-PDF", "PDF to HTML", "PDF to SVG", "PDF to JPG", "PDF to PNG", "Poppler-utils"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chukwuemeka Nwobodo",
+      "email": "jc.nwobodo@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "ncjoes/php-poppler": "dev-master",
+    "illuminate/filesystem": "5.3.*",
+    "illuminate/support": "v5.3.*"
+  },
+  "require-dev":{
+    "phpunit/phpunit":"5.5.*"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "NcJoes\\PdfSuite\\": "src/"
+    }
+  }
+}
