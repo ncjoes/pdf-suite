@@ -82,11 +82,11 @@ class PdfSuite
         }
     }
 
-    public function getInfo()
+    public function getPdfInfo()
     {
-        $pdfInfo = $this->getUtil(C::PDF_INFO);
+        $pdfInfoUtil = $this->getUtil(C::PDF_INFO);
 
-        return new PdfInfoWrapper($pdfInfo);
+        return new PdfInfoWrapper($pdfInfoUtil);
     }
 
     private function getUtil($name)
