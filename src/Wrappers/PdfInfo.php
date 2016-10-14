@@ -7,7 +7,7 @@
  * Time:    4:03 PM
  **/
 
-namespace NcJoes\PdfSuite;
+namespace NcJoes\PdfSuite\Wrappers;
 
 use NcJoes\PhpPoppler\PdfInfo as DataObject;
 

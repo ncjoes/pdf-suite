@@ -23,7 +23,7 @@ use NcJoes\PhpPoppler\PdfToPpm;
 use NcJoes\PhpPoppler\PdfToPs;
 use NcJoes\PhpPoppler\PdfToText;
 use NcJoes\PhpPoppler\PdfUnite;
-use NcJoes\PdfSuite\PdfInfo as PdfInfoWrapper;
+use NcJoes\PdfSuite\Wrappers\PdfInfo as PdfInfoWrapper;
 
 class PdfSuite
 {
