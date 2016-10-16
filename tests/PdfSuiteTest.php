@@ -12,56 +12,51 @@ use NcJoes\PdfSuite\Config;
 
 class PdfSuiteTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var $suite  PdfSuite
+     */
+    private $suite;
+
     public function setUp()
     {
         parent::setUp();
         Config::setBinDirectory(__DIR__.'/../vendor/bin/poppler');
-        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
+        Config::setOutputDirectory(__DIR__.'/results', true);
+        Config::doCleanupOnExit(false);
+
+        $file = dirname(__FILE__).'\sources\test1.pdf';
+        $this->suite = new PdfSuite($file);
     }
 
     public function testGetInfo()
     {
-        $file = __DIR__.'/sources/test1.pdf';
-        $pdf_suite = new PdfSuite($file);
-        $pdf_info = $pdf_suite->getPdfInfo();
-
-        $this->assertArrayHasKey('pages', $pdf_info->getInfo());
+        var_dump($this->suite->getPdfInfo()->getInfo());
     }
+
+    public function testPdfToHtmlConverter()
+    {
+        var_dump($this->suite->getPdfToHtmlConverter()->useDefaultSettings()->convert());
+    }
+
 
     public function testPdfToJpegConverter()
     {
-        $file = dirname(__FILE__).'\sources\test1.pdf';
-        $pdf_suite = new PdfSuite($file);
-        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
-
-        $pdf_suite->getPdfToJpegConverter()->convert();
+        var_dump($this->suite->getPdfToJpegConverter()->convert());
     }
 
     public function testPdfToPngConverter()
     {
-        $file = dirname(__FILE__).'\sources\test1.pdf';
-        $pdf_suite = new PdfSuite($file);
-        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
-
-        $pdf_suite->getPdfToPngConverter()->convert();
+        var_dump($this->suite->getPdfToPngConverter()->convert());
     }
 
     public function testPdfToPsConverter()
     {
-        $file = dirname(__FILE__).'\sources\test1.pdf';
-        $pdf_suite = new PdfSuite($file);
-        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
-
-        $pdf_suite->getPdfToPsConverter()->convert();
+        var_dump($this->suite->getPdfToPsConverter()->convert());
     }
 
     public function testPdfToSvgConverter()
     {
-        $file = dirname(__FILE__).'\sources\test1.pdf';
-        $pdf_suite = new PdfSuite($file);
-        Config::setOutputDirectory(__DIR__.'/results/test-'.date('m-d-Y_H-i-s'), true);
-
-        $pdf_suite->getPdfToSvgConverter()->convert();
+        var_dump($this->suite->getPdfToSvgConverter()->convert());
     }
 
 }
