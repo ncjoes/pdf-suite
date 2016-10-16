@@ -9,10 +9,7 @@
 
 namespace NcJoes\PdfSuite\Utils;
 
-use Illuminate\Filesystem\Filesystem;
 use NcJoes\PdfSuite\Directory;
-use NcJoes\PdfSuite\Files\JpegFile;
-use NcJoes\PopplerPhp\Helpers;
 use NcJoes\PopplerPhp\PdfToCairo as PdfToCairoUtil;
 
 class PdfToJpeg extends PdfToCairo
@@ -25,21 +22,14 @@ class PdfToJpeg extends PdfToCairo
         /**
          * @var $util PdfToCairoUtil
          */
-        $util = $this->util;
+        $util = $this->util();
 
-        $util->setOutputSubDir(uniqid());
-        $directory = new Directory($util->getOutputPath(), true);
+        $directory = $this->getOutputSubDir();
 
         $util->setOutputFilenamePrefix('page');
+        $util->startFromPage($this->startPage());
+        $util->stopAtPage($this->stopPage());
         $util->generateJPG();
-
-        $fileSystem = new Filesystem;
-        $files = $fileSystem->files($directory->path());
-
-        foreach ($files as $file) {
-            $file = Helpers::parseFileRealPath($file);
-            $directory->addItem(new JpegFile($file));
-        }
 
         return $directory;
     }

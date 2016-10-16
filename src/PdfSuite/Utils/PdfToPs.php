@@ -11,6 +11,7 @@ namespace NcJoes\PdfSuite\Utils;
 
 use NcJoes\PdfSuite\Directory;
 use NcJoes\PdfSuite\Files\PostScriptFile;
+use NcJoes\PdfSuite\Helpers as H;
 use NcJoes\PopplerPhp\Constants as C;
 use NcJoes\PopplerPhp\PdfToCairo as PdfToCairoUtil;
 
@@ -24,15 +25,19 @@ class PdfToPs extends PdfToCairo
         /**
          * @var $util PdfToCairoUtil
          */
-        $util = $this->util;
+        $util = $this->util();
 
-        $util->setOutputSubDir(uniqid());
-        $directory = new Directory($util->getOutputPath(), true);
+        $directory = $this->getOutputSubDir();
 
         $num_pages = $this->pdfInfo()->getNumOfPages();
-        for ($page = 1; $page <= $num_pages; $page++) {
-            $number = str_pad($page, strlen((string)$num_pages), '0', STR_PAD_LEFT);
-            $util->setOutputFilenamePrefix('page-'.$number);
+        $pad_width = strlen((string)$num_pages);
+
+        for ($page = $this->startPage(); $page <= $this->stopPage(); $page++) {
+
+            $number = H::padNumber($page, $pad_width);
+            $page_name = 'page-'.$number;
+
+            $util->setOutputFilenamePrefix($page_name);
             $util->startFromPage($page);
             $util->stopAtPage($page);
             $util->generatePS();

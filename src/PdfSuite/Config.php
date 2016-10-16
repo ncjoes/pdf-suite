@@ -22,4 +22,14 @@ abstract class Config extends BaseConfig
     {
         return self::get('ncjoes.psf_suite.cleanup_on_exit', $default);
     }
+
+    public static function autoSaveFilesOnExit($yes = false)
+    {
+        self::set('ncjoes.psf_suite.auto_save_on_exit', $yes);
+    }
+
+    public static function shouldAutoSaveFilesOnExit($default = false)
+    {
+        return self::get('ncjoes.psf_suite.auto_save_on_exit', $default);
+    }
 }
