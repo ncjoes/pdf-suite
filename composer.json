@@ -1,6 +1,6 @@
 {
   "name": "ncjoes/pdf-suite",
-  "description": "PDF package for content conversion and extraction based on NcJoes/PHP-Poppler",
+  "description": "A high level PHP wrapper over [PopplerPhp](https://github.com/ncjoes/poppler-php) for PDF content extraction and conversion using Poppler utils",
   "keywords": ["Poppler-utils", "PDF Converter", "PDF", "PDF to HTML", "PDF to SVG", "PDF to JPG", "PDF to PNG", "PDF to PostScript"],
   "license": "MIT",
   "authors": [
@@ -12,7 +12,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": "^5.6 || ^7.0",
-    "ncjoes/php-poppler": "dev-master",
+    "ncjoes/poppler-php": "dev-master",
     "illuminate/filesystem": "5.3.*",
     "illuminate/support": "v5.3.*"
   },
@@ -22,7 +22,7 @@
 
   "autoload": {
     "psr-4": {
-      "NcJoes\\PdfSuite\\": "src/"
+      "NcJoes\\PdfSuite\\": "src/PdfSuite"
     }
   }
 }

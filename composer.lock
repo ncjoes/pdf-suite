@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc5662b2f19d1be360d0f2898daacefd",
-    "content-hash": "c478bf3b22cf07036c5b979a014b5d87",
+    "hash": "51e983c94bb6b7583b0cb947d74f05ef",
+    "content-hash": "e2741a39111cad931996092a0b92234c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -269,17 +269,17 @@
             "time": "2016-10-02 01:14:47"
         },
         {
-            "name": "ncjoes/php-poppler",
+            "name": "ncjoes/poppler-php",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ncjoes/PHP-Poppler.git",
-                "reference": "3177287fcf10037ba72a7f82498d5f9c190bef9a"
+                "url": "https://github.com/ncjoes/poppler-php.git",
+                "reference": "e1ec5751dfffe9b8ddf2b8a533b297714828adee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ncjoes/PHP-Poppler/zipball/3177287fcf10037ba72a7f82498d5f9c190bef9a",
-                "reference": "3177287fcf10037ba72a7f82498d5f9c190bef9a",
+                "url": "https://api.github.com/repos/ncjoes/poppler-php/zipball/e1ec5751dfffe9b8ddf2b8a533b297714828adee",
+                "reference": "e1ec5751dfffe9b8ddf2b8a533b297714828adee",
                 "shasum": ""
             },
             "require": {
@@ -296,7 +296,7 @@
                     "NcJoes": "src"
                 },
                 "psr-4": {
-                    "NcJoes\\PhpPoppler\\": "src/"
+                    "NcJoes\\PopplerPhp\\": "src/PopplerPhp"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -317,11 +317,11 @@
                 "PDF to PNG",
                 "PDF to SVG",
                 "PHP-PDF",
-                "PHP-Poppler",
+                "Poppler-PHP",
                 "Poppler-utils",
                 "pdf"
             ],
-            "time": "2016-10-14 17:11:04"
+            "time": "2016-10-16 02:20:28"
         },
         {
             "name": "paragonie/random_compat",
@@ -1728,7 +1728,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ncjoes/php-poppler": 20
+        "ncjoes/poppler-php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
