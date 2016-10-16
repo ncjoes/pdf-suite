@@ -38,7 +38,7 @@ class PdfToPng extends PdfToCairo
 
         foreach ($files as $file) {
             $file = Helpers::parseFileRealPath($file);
-            $directory->addFile(new PngFile($file));
+            $directory->addItem(new PngFile($file));
         }
 
         return $directory;

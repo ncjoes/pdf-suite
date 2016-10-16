@@ -38,7 +38,7 @@ class PdfToJpeg extends PdfToCairo
 
         foreach ($files as $file) {
             $file = Helpers::parseFileRealPath($file);
-            $directory->addFile(new JpegFile($file));
+            $directory->addItem(new JpegFile($file));
         }
 
         return $directory;

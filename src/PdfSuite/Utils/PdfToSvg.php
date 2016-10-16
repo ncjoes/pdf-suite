@@ -38,7 +38,7 @@ class PdfToSvg extends PdfToCairo
             $util->generateSVG();
 
             $path = $util->getOutputPath().C::DS.$util->getOutputFilenamePrefix().$util->outputExtension();
-            $directory->addFile(new SvgFile($path));
+            $directory->addItem(new SvgFile($path));
         }
 
         return $directory;

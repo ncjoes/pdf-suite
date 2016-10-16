@@ -38,7 +38,7 @@ class PdfToPs extends PdfToCairo
             $util->generatePS();
 
             $path = $util->getOutputPath().C::DS.$util->getOutputFilenamePrefix().$util->outputExtension();
-            $directory->addFile(new PostScriptFile($path));
+            $directory->addItem(new PostScriptFile($path));
         }
 
         return $directory;

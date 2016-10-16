@@ -54,7 +54,7 @@ class PdfToHtml extends PopplerUtil
             $util->generate();
 
             $path = $util->getOutputPath().C::DS.$util->getOutputFilenamePrefix().$util->outputExtension();
-            $directory->addFile(new HtmlFile($path));
+            $directory->addItem(new HtmlFile($path));
         }
 
         return $directory;

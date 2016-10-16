@@ -10,9 +10,18 @@
 namespace NcJoes\PdfSuite;
 
 use Illuminate\Filesystem\Filesystem;
+use NcJoes\PdfSuite\Contracts\FileContract;
+use NcJoes\PdfSuite\Files\EpsFile;
+use NcJoes\PdfSuite\Files\GenericFile;
+use NcJoes\PdfSuite\Files\HtmlFile;
+use NcJoes\PdfSuite\Files\JpegFile;
+use NcJoes\PdfSuite\Files\PdfFile;
+use NcJoes\PdfSuite\Files\PngFile;
+use NcJoes\PdfSuite\Files\PostScriptFile;
+use NcJoes\PdfSuite\Files\SvgFile;
 use NcJoes\PopplerPhp\Constants as C;
 
-abstract class File
+abstract class File implements FileContract
 {
     /**
      * @var $path string
@@ -39,6 +48,48 @@ abstract class File
         throw new Exception('Supplied path does not point to an existing file');
     }
 
+    public static function make($path)
+    {
+        if (is_file($path)) {
+            $class = self::getFileClass($path);
+
+            return new $class($path);
+        }
+        throw new Exception('Supplied path does not point to an existing file');
+    }
+
+    public static function getFileClass($path)
+    {
+        $extension = strtolower(self::filesystem()->extension($path));
+        switch ($extension) {
+            case 'eps' :
+                $class = EpsFile::class;
+            break;
+            case 'html' :
+                $class = HtmlFile::class;
+            break;
+            case 'jpg' :
+                $class = JpegFile::class;
+            break;
+            case 'pdf':
+                $class = PdfFile::class;
+            break;
+            case 'png':
+                $class = PngFile::class;
+            break;
+            case 'ps':
+                $class = PostScriptFile::class;
+            break;
+            case 'svg':
+                $class = SvgFile::class;
+            break;
+            default :
+                $class = GenericFile::class;
+        }
+
+        return $class;
+    }
+
     public function path()
     {
         return $this->path;
@@ -54,14 +105,14 @@ abstract class File
         return self::filesystem()->extension($this->path());
     }
 
-    public function getDirectoryName()
+    public function parentDirectory()
     {
         return self::filesystem()->dirname($this->path());
     }
 
     public function rename($new_name, $extension = null)
     {
-        $new_path = $this->getDirectoryName().C::DS.$new_name.'.'.(is_null($extension) ? $this->extension() : $extension);
+        $new_path = $this->parentDirectory().C::DS.$new_name.'.'.(is_null($extension) ? $this->extension() : $extension);
 
         if ($this->filesystem()->move($this->path(), $new_path)) {
             $this->setPath($new_path);
@@ -74,7 +125,7 @@ abstract class File
 
     public function delete()
     {
-        $this->filesystem()->delete($this->path());
+        return $this->filesystem()->delete($this->path());
     }
 
     public function moveTo($new_dir)
@@ -86,7 +137,12 @@ abstract class File
 
     public function save()
     {
-        return self::filesystem()->put($this->path(), $this->get(), true);
+        $status = self::filesystem()->put($this->path(), $this->get(), true);
+        if ($status) {
+            $this->contents = null;
+        }
+
+        return $status;
     }
 
     public function saveAs($new_path)
@@ -103,7 +159,7 @@ abstract class File
         return $this->contents;
     }
 
-    public function put($contents, $save = false)
+    public function put($contents, $save = null)
     {
         $this->contents = $contents;
 
@@ -140,9 +196,11 @@ abstract class File
         return self::$filesystem;
     }
 
-    function __destruct()
+    public function __destruct()
     {
         if (Config::shouldCleanupOnExit())
             $this->delete();
+        else
+            $this->save();
     }
 }
