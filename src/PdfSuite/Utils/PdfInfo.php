@@ -7,11 +7,11 @@
  * Time:    4:03 PM
  **/
 
-namespace NcJoes\PdfSuite\Wrappers;
+namespace NcJoes\PdfSuite\Utils;
 
-use NcJoes\PhpPoppler\PdfInfo as PdfInfoUtil;
+use NcJoes\PopplerPhp\PdfInfo as PdfInfoUtil;
 
-class PdfInfo extends PhpPopplerUtil
+class PdfInfo extends PopplerUtil
 {
     public function __construct(PdfInfoUtil $util)
     {
