@@ -7,7 +7,7 @@
  * Time:    8:45 PM
  **/
 
-namespace NcJoes\PdfSuite\Wrappers;
+namespace NcJoes\PdfSuite\Utils;
 
 class PdfToEps extends PdfToCairo
 {

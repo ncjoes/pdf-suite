@@ -7,13 +7,13 @@
  * Time:    8:48 PM
  **/
 
-namespace NcJoes\PdfSuite\Wrappers;
+namespace NcJoes\PdfSuite\Utils;
 
-use NcJoes\PhpPoppler\PdfUnite as PdfUniteUtil;
+use NcJoes\PopplerPhp\PdfSeparate as PdfSeparateUtil;
 
-class PdfJoin extends PdfUniteUtil
+class PdfSplit extends PdfSeparateUtil
 {
-    public function join()
+    public function split()
     {
         // TODO: Implement convert() method.
     }
