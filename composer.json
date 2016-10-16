@@ -33,7 +33,8 @@
     },
     "autoload" : {
         "psr-4" : {
-            "NcJoes\\PdfSuite\\" : "src/PdfSuite"
+            "NcJoes\\PdfSuite\\" : "src/PdfSuite",
+            "NcJoes\\PdfSuite\\Tests\\" : "tests"
         }
     },
     "minimum-stability" : "dev",
