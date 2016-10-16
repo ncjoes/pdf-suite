@@ -33,22 +33,35 @@ class Directory implements FileContract
 
     public function __construct($path, $new = false)
     {
-        if ($new) {
+        if ($new and !file_exists($path)) {
             $this->filesystem()->makeDirectory($path);
         }
         $this->setPath($path);
 
+        return $this;
+    }
+
+    public function refresh()
+    {
+        unset($this->files);
+        $this->files = collect();
+
         $sub_directories = $this->filesystem()->directories($this->path());
         foreach ($sub_directories as $sub_directory) {
-            $this->addItem(new Directory($sub_directory));
+            if (is_dir($sub_directory) and !is_file($sub_directory))
+                $this->addItem(new Directory($sub_directory));
         }
 
         $files = $this->filesystem()->files($this->path());
         foreach ($files as $file) {
-            $this->addItem(File::make($file));
+            if (is_file($file) and !is_dir($file))
+                $this->addItem(File::make($file));
         }
+    }
 
-        return $this;
+    public function hash()
+    {
+        return $this->mkKey(Helpers::parseDirName($this->path()));
     }
 
     public function path()
@@ -99,7 +112,7 @@ class Directory implements FileContract
     public function save()
     {
         $net_saved = 0;
-        foreach ($this->files() as $file) {
+        foreach ($this->items() as $file) {
             $net_saved += $file->save();
         }
 
@@ -109,7 +122,7 @@ class Directory implements FileContract
     public function saveAs($new_path)
     {
         if ($this->filesystem()->makeDirectory($new_path, 0755, true, true)) {
-            foreach ($this->files() as $file) {
+            foreach ($this->items() as $file) {
                 if (!$file->save())
                     return false;
             }
@@ -123,7 +136,7 @@ class Directory implements FileContract
     public function get()
     {
         $paths = [];
-        foreach ($this->files() as $file) {
+        foreach ($this->items() as $file) {
             array_push($paths, $file->path());
         }
 
@@ -145,6 +158,11 @@ class Directory implements FileContract
         return false;
     }
 
+    public static function mkKey($path)
+    {
+        return md5($path);
+    }
+
     protected function setPath($path)
     {
         if (is_dir($path)) {
@@ -155,48 +173,49 @@ class Directory implements FileContract
         throw new Exception('Supplied path does not point to a directory');
     }
 
-    public function files()
+    protected function items()
     {
         if (!is_object($this->files)) {
-            $this->files = new Collection;
+            $this->refresh();
         }
 
         return $this->files;
     }
 
-    public function getFile($index)
+    public function getItems()
     {
-        if ($this->files()->offsetExists($index)) {
+        return clone $this->items();
+    }
+
+    protected function item($hash)
+    {
+        if ($this->items()->offsetExists($hash)) {
             /**
              * @var $file File
              */
-            $file = $this->files()->get($index);
+            $file = $this->items()->get($hash);
 
             return $file;
         }
 
-        throw new Exception('Index out of bound: '.$index);
+        throw new Exception('Index not found: '.$hash);
     }
 
-    public function putItem($index, FileContract $file)
+    public function getItem($hash)
     {
-        if ($this->files()->offsetExists($index)) {
-            $this->files()->put($index, $file);
-
-            return $this;
-        }
-
-        throw new Exception('Index out of bound: '.$index);
+        return clone $this->item($hash);
     }
 
     public function addItem(FileContract $file)
     {
-        $this->files()->push($file);
+        $this->items()->put($file->hash(), $file);
+
+        return $this;
     }
 
     public function count()
     {
-        return $this->files()->count();
+        return $this->items()->count();
     }
 
     protected static function filesystem()

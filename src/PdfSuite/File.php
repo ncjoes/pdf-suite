@@ -50,12 +50,12 @@ abstract class File implements FileContract
 
     public static function make($path)
     {
-        if (is_file($path)) {
+        if (is_file($path) and !is_dir($path)) {
             $class = self::getFileClass($path);
 
             return new $class($path);
         }
-        throw new Exception('Supplied path does not point to an existing file');
+        throw new Exception('Supplied path does not point to a file: '.$path);
     }
 
     public static function getFileClass($path)
@@ -88,6 +88,11 @@ abstract class File implements FileContract
         }
 
         return $class;
+    }
+
+    public function hash()
+    {
+        return $this->mkKey($this->path());
     }
 
     public function path()
@@ -139,7 +144,7 @@ abstract class File implements FileContract
     {
         $status = self::filesystem()->put($this->path(), $this->get(), true);
         if ($status) {
-            $this->contents = null;
+            $this->contents = $this->get();
         }
 
         return $status;
@@ -152,7 +157,7 @@ abstract class File implements FileContract
 
     public function get()
     {
-        if (empty($this->contents)) {
+        if (empty($this->contents) and $this->filesystem()->exists($this->path())) {
             $this->contents = self::filesystem()->get($this->path());
         }
 
@@ -180,6 +185,11 @@ abstract class File implements FileContract
         return $this->filesystem()->prepend($this->path(), $contents);
     }
 
+    protected function mkKey($path)
+    {
+        return md5(Helpers::parseFileRealPath($path));
+    }
+
     protected function setPath($path)
     {
         $this->path = $path;
@@ -200,7 +210,8 @@ abstract class File implements FileContract
     {
         if (Config::shouldCleanupOnExit())
             $this->delete();
-        else
+        elseif(Config::shouldAutoSaveFilesOnExit() and $this->filesystem()->exists($this->path())) {
             $this->save();
+        }
     }
 }

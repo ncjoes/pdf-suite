@@ -11,6 +11,8 @@ namespace NcJoes\PdfSuite\Contracts;
 
 interface FileContract
 {
+    public function hash();
+
     public function path();
 
     public function basename();
