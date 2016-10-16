@@ -9,58 +9,68 @@
 
 namespace NcJoes\PdfSuite;
 
-use NcJoes\PdfSuite\Exceptions\FileNotFoundException;
-use NcJoes\PdfSuite\Wrappers\PdfInfo as PdfInfoWrapper;
-use NcJoes\PdfSuite\Wrappers\PdfJoin as PdfJoiner;
-use NcJoes\PdfSuite\Wrappers\PdfSplit as PdfSplitter;
-use NcJoes\PdfSuite\Wrappers\PdfToEps as PdfToEPSConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToHtml as PdfToHtmlConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToJpeg as PdfToJPEGConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToPng as PdfToPNGConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToPs as PdfToPSConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToSvg as PdfToSvgConverter;
-use NcJoes\PdfSuite\Wrappers\PdfToTiff as PdfToTIFFConverter;
-use NcJoes\PhpPoppler\Constants as C;
-use NcJoes\PhpPoppler\Helpers as H;
-use NcJoes\PhpPoppler\PdfDetach;
-use NcJoes\PhpPoppler\PdfFonts;
-use NcJoes\PhpPoppler\PdfImages;
-use NcJoes\PhpPoppler\PdfInfo;
-use NcJoes\PhpPoppler\PdfSeparate;
-use NcJoes\PhpPoppler\PdfToCairo;
-use NcJoes\PhpPoppler\PdfToHtml;
-use NcJoes\PhpPoppler\PdfToPpm;
-use NcJoes\PhpPoppler\PdfToPs;
-use NcJoes\PhpPoppler\PdfToText;
-use NcJoes\PhpPoppler\PdfUnite;
+use NcJoes\PdfSuite\Utils\PdfInfo as PdfInfoWrapper;
+use NcJoes\PdfSuite\Utils\PdfJoin as PdfJoiner;
+use NcJoes\PdfSuite\Utils\PdfSplit as PdfSplitter;
+use NcJoes\PdfSuite\Utils\PdfToEps as PdfToEPSConverter;
+use NcJoes\PdfSuite\Utils\PdfToHtml as PdfToHtmlConverter;
+use NcJoes\PdfSuite\Utils\PdfToJpeg as PdfToJPEGConverter;
+use NcJoes\PdfSuite\Utils\PdfToPng as PdfToPNGConverter;
+use NcJoes\PdfSuite\Utils\PdfToPs as PdfToPSConverter;
+use NcJoes\PdfSuite\Utils\PdfToSvg as PdfToSvgConverter;
+use NcJoes\PdfSuite\Utils\PdfToTiff as PdfToTIFFConverter;
+use NcJoes\PopplerPhp\Constants as C;
+use NcJoes\PopplerPhp\Helpers as H;
+use NcJoes\PopplerPhp\PdfDetach;
+use NcJoes\PopplerPhp\PdfFonts;
+use NcJoes\PopplerPhp\PdfImages;
+use NcJoes\PopplerPhp\PdfInfo;
+use NcJoes\PopplerPhp\PdfSeparate;
+use NcJoes\PopplerPhp\PdfToCairo;
+use NcJoes\PopplerPhp\PdfToHtml;
+use NcJoes\PopplerPhp\PdfToPpm;
+use NcJoes\PopplerPhp\PdfToPs;
+use NcJoes\PopplerPhp\PdfToText;
+use NcJoes\PopplerPhp\PdfUnite;
 
 class PdfSuite
 {
-    private $source_pdf;
-    private $utils = [];
-    private $output_filename_prefix;
+    private        $source_pdf;
+    private        $utils = [];
+    private static $instance;
 
-    public function __construct($pdfFile = '')
+    public function __construct($pdf_file_path = '')
     {
-        if ($pdfFile != '') {
-            return $this->open($pdfFile);
+        if ($pdf_file_path !== '') {
+            return $this->open($pdf_file_path);
         }
 
         return $this;
     }
 
+    public static function instance($pdf_file_path = '')
+    {
+        if (!is_object(self::$instance)) {
+            self::$instance = new static($pdf_file_path);
+        }
+
+        return self::$instance;
+    }
+
     public function open($pdfFile)
     {
-        $real_path = realpath(H::parseDir($pdfFile));
+        $real_path = H::parseFileRealPath($pdfFile);
+
         if (is_file($real_path)) {
             $this->source_pdf = $real_path;
 
-            if (Config::isSet(C::OUTPUT_DIR))
-                return $this;
-            else
-                return $this->outputDir(dirname($pdfFile));
+            if (!Config::isSet(C::OUTPUT_DIR)) {
+                Config::setOutputDirectory(dirname($pdfFile));
+            }
+
+            return $this;
         }
-        throw new FileNotFoundException($pdfFile);
+        throw new Exception("File not found :".$pdfFile);
     }
 
     public function outputDir($dir = '')
@@ -72,23 +82,6 @@ class PdfSuite
         }
 
         return Config::getOutputDirectory();
-    }
-
-    public function outputFilenamePrefix($name = '')
-    {
-        if (!empty($name) and is_string($name)) {
-            $this->output_filename_prefix = basename($name);
-
-            Config::setOutputFilename($this->output_filename_prefix);
-
-            return $this;
-        }
-        else {
-            $base = basename($this->source_pdf);
-            $default_name = str_replace('.pdf', '', $base) ?: '';
-
-            return Config::getOutputFilename($default_name);
-        }
     }
 
     public function getPdfInfo()
