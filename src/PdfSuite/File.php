@@ -164,7 +164,7 @@ abstract class File implements FileContract
         return $this->contents;
     }
 
-    public function put($contents, $save = null)
+    public function put($contents, $save = false)
     {
         $this->contents = $contents;
 
@@ -210,7 +210,7 @@ abstract class File implements FileContract
     {
         if (Config::shouldCleanupOnExit())
             $this->delete();
-        elseif(Config::shouldAutoSaveFilesOnExit() and $this->filesystem()->exists($this->path())) {
+        elseif (Config::shouldAutoSaveFilesOnExit() and is_file($this->path())) {
             $this->save();
         }
     }

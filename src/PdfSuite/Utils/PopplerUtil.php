@@ -68,10 +68,12 @@ abstract class PopplerUtil
 
     public function setPageRange($start, $stop)
     {
-        if ($start > $stop) {
-            throw new Exception("Invalid page range: start page of -{$start}- is greater than stop page -{$stop}-");
+        $num_pages = (int)$this->pdfInfo()->getNumOfPages();
+        if ($start > $stop or $start > $num_pages) {
+            throw new Exception(
+                "Invalid page range: start page of -{$start}- is either greater than 
+                stop page -{$stop}- or greater number of pages in document -{$num_pages}-");
         }
-        $num_pages = $this->pdfInfo()->getNumOfPages();
         $this->start_page = $start < 1 ? 1 : $start;
         $this->stop_page = $stop > $num_pages ? $num_pages : $stop;
 
@@ -80,8 +82,8 @@ abstract class PopplerUtil
 
     public function startPage()
     {
-        if (!$this->stop_page) {
-            $this->stop_page = 1;
+        if (!$this->start_page) {
+            $this->start_page = 1;
         }
 
         return $this->start_page;
