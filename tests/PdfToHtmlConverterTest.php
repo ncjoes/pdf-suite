@@ -21,12 +21,32 @@ class PdfToHtmlConverterTest extends PdfSuiteTestBase
             //var_dump($exception->getMessage());
         }
     }
-    public function testPdfToHtmlConverter()
+
+    public function testSinglePageConverterOption()
     {
         $converter = $this->suite->getPdfToHtmlConverter();
 
-        $converter->setPageRange(1, 20)->useDefaultSettings();
-        $directory = $converter->convert();
-        $this->assertEquals(20, $directory->count());
+        $converter->setPageRange(1, 16)->useDefaultSettings();
+        $converter->setOutputSubDir('testSinglePageConverterOption');
+        $directory = $converter->convert($converter::MODE_SINGLE_PAGE_PER_DOC);
+        $this->assertEquals(2 * (16), $directory->count());
+    }
+
+    public function testCombinedPageConverterOption()
+    {
+        $converter = $this->suite->getPdfToHtmlConverter();
+
+        $converter->setPageRange(1, 16)->useDefaultSettings();
+        $converter->setOutputSubDir('testCombinedPageConverterOption');
+        $converter->convert($converter::MODE_MULTI_PAGED_SINGLE_DOC);
+    }
+
+    public function testComplexPageConverterOption()
+    {
+        $converter = $this->suite->getPdfToHtmlConverter();
+
+        $converter->setPageRange(1, 16)->useDefaultSettings();
+        $converter->setOutputSubDir('testComplexPageConverterOption');
+        $converter->convert($converter::MODE_COMPLEX_DOCUMENT);
     }
 }

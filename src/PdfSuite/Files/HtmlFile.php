@@ -19,16 +19,15 @@ class HtmlFile extends File
     public function __construct($path)
     {
         parent::__construct($path);
-        $this->put(str_replace(["Â"], "", $this->get()));
-
-        $dom = new DOM($this->get());
-        $this->dom = $dom;
     }
 
     public function getDOM()
     {
-        $this->dom->clear();
-        $this->dom->addHtmlContent($this->get());
+        if(!$this->dom) {
+            $this->save();
+            $this->dom = new DOM();
+            $this->dom->addHtmlContent($this->get());
+        }
 
         return $this->dom;
     }
@@ -36,6 +35,19 @@ class HtmlFile extends File
     public function putDOM(DOM $dom, $save = false)
     {
         return $this->put($dom->html(), $save);
+    }
+
+    public static function cleanEmptyLines($html)
+    {
+        $content = [];
+        $lines = explode("\n", $html);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if(strlen($line)) {
+                $content[] = $line;
+            }
+        }
+        return implode("\n", $content);
     }
 
     public function __destruct()
