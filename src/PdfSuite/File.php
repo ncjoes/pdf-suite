@@ -142,7 +142,7 @@ abstract class File implements FileContract
 
     public function save()
     {
-        $status = self::filesystem()->put($this->path(), $this->get(), true);
+        $status = !is_file($this->path()) ? false : self::filesystem()->put($this->path(), $this->get(), true);
         if ($status) {
             $this->contents = $this->get();
         }
@@ -210,7 +210,7 @@ abstract class File implements FileContract
     {
         if (Config::shouldCleanupOnExit())
             $this->delete();
-        elseif (Config::shouldAutoSaveFilesOnExit() and is_file($this->path())) {
+        elseif (Config::shouldAutoSaveFilesOnExit()) {
             $this->save();
         }
     }
