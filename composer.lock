@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4306d84819e743fd26937ab3dc94981c",
-    "content-hash": "0892d5f9be13e984a03b89994f7afadd",
+    "hash": "11092ef3685c6befc351420535691b17",
+    "content-hash": "f0bef3c537481436b16daa79da6f9237",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -270,31 +270,28 @@
         },
         {
             "name": "ncjoes/poppler-php",
-            "version": "dev-master",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ncjoes/poppler-php.git",
-                "reference": "e1ec5751dfffe9b8ddf2b8a533b297714828adee"
+                "reference": "53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ncjoes/poppler-php/zipball/e1ec5751dfffe9b8ddf2b8a533b297714828adee",
-                "reference": "e1ec5751dfffe9b8ddf2b8a533b297714828adee",
+                "url": "https://api.github.com/repos/ncjoes/poppler-php/zipball/53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c",
+                "reference": "53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c",
                 "shasum": ""
             },
             "require": {
                 "illuminate/config": "5.3.*",
                 "illuminate/support": "5.3.*",
-                "php": "^5.6 || ^7.0"
+                "php": ">=5.5.9"
             },
             "require-dev": {
                 "phpunit/phpunit": "5.5.*"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "NcJoes": "src"
-                },
                 "psr-4": {
                     "NcJoes\\PopplerPhp\\": "src/PopplerPhp"
                 }
@@ -321,7 +318,7 @@
                 "Poppler-utils",
                 "pdf"
             ],
-            "time": "2016-10-16 02:20:28"
+            "time": "2016-10-17 04:06:24"
         },
         {
             "name": "paragonie/random_compat",
@@ -1894,11 +1891,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "ncjoes/poppler-php": 20
-    },
-    "prefer-stable": true,
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9"
