@@ -10,7 +10,7 @@
 
 ## Why Use PDF-Suite?
 
-Many packages tagged as PDF->* converters are actually *->PDF converters, i.e from other formats to PDF.
+Many packages tagged as PDF converters are actually *->PDF converters, i.e from other formats to PDF.
 PDF Suite, on the other hand, provides a high level of abstraction over the [PopplerPhp](https://github.com/ncjoes/poppler-php) package,
 making it more easy to convert your PDF files into any of the formats supported by [Poppler utils](poppler.freedesktop.org).
 These supported formats include:
@@ -52,19 +52,17 @@ Here are some examples.
 use NcJoes\PdfSuite\PdfSuite;
 use NcJoes\PdfSuite\Config;
 
-//set up poppler binaries location
-Config::setBinDirectory(__DIR__.'/../vendor/bin/poppler');
-
-//set output directory
-Config::setOutputDirectory(__DIR__.'/results', true);
-
-Config::doCleanupOnExit(false); //set to true if you want output files to be deleted on script termination
+//Configuration
+    Config::setBinDirectory(__DIR__.'/../vendor/bin/poppler');//set up poppler binaries location
+    Config::setOutputDirectory(__DIR__.'/results', true); //set main output directory
+    Config::doCleanupOnExit(false); //set to true if you want output files to be deleted on script termination
 
 
-// get pdf meta-data
+// Create PdfSuite instance
 $file = dirname(__FILE__).'\sources\test1.pdf';
 $pdfSuite = new PdfSuite($file);
 
+//Pdf metadata
     $pdf_info = $pdfSuite->getPdfInfo(); //returns an associative array
     $authors = $pdf_info->getAuthors();
     $number_of_pages = $pdf_info->getNumOfPages();
@@ -103,7 +101,8 @@ $pdfSuite = new PdfSuite($file);
     $svgConverter->setPageRange(15, 33);
     $svgConverter->convert(); // returns a directory instance
 
-//You can also obtain the underlying NcJoes\PopplerPhp\PopplerUtil instance to further customize any of the converters
+//You can also obtain the underlying NcJoes\PopplerPhp\PopplerUtil instance
+// and use it to further customize any of the converters
     $svgConverter = $pdfSuite->getPdfToSvgConverter();
     $svgConverterUtil = $svgConverter->util();
     $svgConverterUtil->utilOptions(); //returns an array of all available options for svgConverter
@@ -114,4 +113,4 @@ $pdfSuite = new PdfSuite($file);
 
 ### Feedback & Contribute
 
-Send me an issue for improvement or any buggy thing. Thanks :+1:
+Notify me of any issues, bugs, or improvements. Thanks :+1:
