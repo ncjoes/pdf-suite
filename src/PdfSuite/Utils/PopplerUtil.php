@@ -18,6 +18,7 @@ abstract class PopplerUtil
 {
     private $util;
     private $directory;
+    private $prefix;
     private $start_page;
     private $stop_page;
 
@@ -67,7 +68,7 @@ abstract class PopplerUtil
 
     public function setPageRange($start, $stop)
     {
-        if($start > $stop) {
+        if ($start > $stop) {
             throw new Exception("Invalid page range: start page of -{$start}- is greater than stop page -{$stop}-");
         }
         $num_pages = $this->pdfInfo()->getNumOfPages();
@@ -79,17 +80,29 @@ abstract class PopplerUtil
 
     public function startPage()
     {
-        if(!$this->stop_page) {
+        if (!$this->stop_page) {
             $this->stop_page = 1;
         }
+
         return $this->start_page;
     }
 
     public function stopPage()
     {
-        if(!$this->stop_page) {
+        if (!$this->stop_page) {
             $this->stop_page = $this->pdfInfo()->getNumOfPages();
         }
+
         return $this->stop_page;
+    }
+
+    public function setFilenamePrefix($prefix)
+    {
+        $this->prefix = $prefix;
+    }
+
+    public function getFilenamePrefix()
+    {
+        return $this->prefix ?: str_replace('.pdf', '', basename($this->util()->sourcePdf()));
     }
 }
