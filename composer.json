@@ -22,7 +22,7 @@
     ],
     "require" : {
         "php" : ">=5.5.9",
-        "ncjoes/poppler-php" : "dev-master",
+        "ncjoes/poppler-php" : "^0.1",
         "illuminate/filesystem" : "5.3.*",
         "illuminate/support" : "5.3.*",
         "symfony/dom-crawler" : "3.1.*",

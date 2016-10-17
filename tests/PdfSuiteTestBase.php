@@ -31,7 +31,7 @@ abstract class PdfSuiteTestBase extends \PHPUnit_Framework_TestCase
         Config::setOutputDirectory(__DIR__.'/results', true);
         Config::doCleanupOnExit(false);
 
-        $file = dirname(__FILE__).'\sources\test5.pdf';
+        $file = dirname(__FILE__).'\sources\test1.pdf';
         $this->suite = new PdfSuite($file);
         $this->info = $this->suite->getPdfInfo();
     }
