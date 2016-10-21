@@ -41,7 +41,7 @@ abstract class File implements FileContract
     public function __construct($path)
     {
         if (is_file($path)) {
-            $this->path = $path;
+            $this->path = Helpers::parseFileRealPath($path);
 
             return $this;
         }
@@ -133,11 +133,11 @@ abstract class File implements FileContract
         return $this->filesystem()->delete($this->path());
     }
 
-    public function moveTo($new_dir)
+    public function moveTo($new_path)
     {
         $fs = $this->filesystem();
 
-        return $fs->move($this->path(), $new_dir.C::DS.$this->basename());
+        return $fs->move($this->path(), $new_path);
     }
 
     public function save()
@@ -197,7 +197,7 @@ abstract class File implements FileContract
         return $this;
     }
 
-    protected function filesystem()
+    protected static function filesystem()
     {
         if (!is_object(self::$filesystem)) {
             self::$filesystem = new Filesystem();

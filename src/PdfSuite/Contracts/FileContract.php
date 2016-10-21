@@ -25,7 +25,7 @@ interface FileContract
 
     public function delete();
 
-    public function moveTo($new_dir);
+    public function moveTo($new_path);
 
     public function save();
 

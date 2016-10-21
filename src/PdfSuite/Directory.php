@@ -102,11 +102,11 @@ class Directory implements FileContract
         return $this->filesystem()->deleteDirectory($this->path());
     }
 
-    public function moveTo($new_dir)
+    public function moveTo($new_path)
     {
         $fs = $this->filesystem();
 
-        return $fs->moveDirectory($this->path(), $new_dir.C::DS.$this->basename());
+        return $fs->moveDirectory($this->path(), $new_path);
     }
 
     public function save()
