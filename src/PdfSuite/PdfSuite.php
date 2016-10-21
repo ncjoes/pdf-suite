@@ -44,6 +44,7 @@ class PdfSuite
         if ($pdf_file_path !== '') {
             return $this->open($pdf_file_path);
         }
+        self::$instance = $this;
 
         return $this;
     }
