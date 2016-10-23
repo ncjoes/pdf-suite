@@ -215,9 +215,7 @@ abstract class File implements FileContract
 
     public function __destruct()
     {
-        if (Config::shouldCleanupOnExit())
-            $this->delete();
-        elseif (Config::shouldAutoSaveFilesOnExit()) {
+        if (Config::shouldAutoSaveFilesOnExit()) {
             $this->save();
         }
     }

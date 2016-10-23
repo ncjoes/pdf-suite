@@ -9,6 +9,7 @@
 
 namespace NcJoes\PdfSuite\Utils;
 
+use NcJoes\PdfSuite\Config;
 use NcJoes\PdfSuite\Directory;
 use NcJoes\PdfSuite\Exception;
 use NcJoes\PdfSuite\PdfSuite;
@@ -106,5 +107,12 @@ abstract class PopplerUtil
     public function getFilenamePrefix()
     {
         return $this->prefix ?: str_replace('.pdf', '', basename($this->util()->sourcePdf()));
+    }
+
+    function __destruct()
+    {
+        if (Config::shouldCleanupOnExit()) {
+            $this->getOutputSubDir()->delete();
+        }
     }
 }

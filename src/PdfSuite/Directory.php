@@ -41,24 +41,6 @@ class Directory implements FileContract
         return $this;
     }
 
-    public function refresh()
-    {
-        unset($this->files);
-        $this->files = collect();
-
-        $sub_directories = $this->filesystem()->directories($this->path());
-        foreach ($sub_directories as $sub_directory) {
-            if (is_dir($sub_directory) and !is_file($sub_directory))
-                $this->addItem(new Directory($sub_directory));
-        }
-
-        $files = $this->filesystem()->files($this->path());
-        foreach ($files as $file) {
-            if (is_file($file) and !is_dir($file))
-                $this->addItem(File::make($file));
-        }
-    }
-
     public function hash()
     {
         return $this->mkKey(Helpers::parseDirName($this->path()));
@@ -183,15 +165,36 @@ class Directory implements FileContract
     protected function items()
     {
         if (!is_object($this->files)) {
+            $this->files = collect();
             $this->refresh();
         }
 
         return $this->files;
     }
 
+    public function refresh()
+    {
+        foreach ($this->files as $file) {
+            if (!$this->filesystem()->exists($file->path()))
+                $this->files->offsetUnset($file->hash());
+        }
+
+        $sub_directories = $this->filesystem()->directories($this->path());
+        foreach ($sub_directories as $sub_directory) {
+            if (is_dir($sub_directory) and !is_file($sub_directory))
+                $this->addItem(new Directory($sub_directory));
+        }
+
+        $files = $this->filesystem()->files($this->path());
+        foreach ($files as $file) {
+            if (is_file($file) and !is_dir($file))
+                $this->addItem(File::make($file));
+        }
+    }
+
     public function getItems()
     {
-        return clone $this->items();
+        return $this->items();
     }
 
     protected function item($hash)
@@ -210,7 +213,7 @@ class Directory implements FileContract
 
     public function getItem($hash)
     {
-        return clone $this->item($hash);
+        return $this->item($hash);
     }
 
     public function addItem(FileContract $file)
@@ -232,11 +235,5 @@ class Directory implements FileContract
         }
 
         return self::$filesystem;
-    }
-
-    function __destruct()
-    {
-        if (Config::shouldCleanupOnExit())
-            $this->filesystem()->deleteDirectory($this->path());
     }
 }
