@@ -109,6 +109,13 @@ class Directory implements FileContract
         return $fs->moveDirectory($this->path(), $new_path);
     }
 
+    public function copyTo($new_path)
+    {
+        $fs = $this->filesystem();
+
+        return $fs->copyDirectory($this->path(), $new_path);
+    }
+
     public function save()
     {
         $net_saved = 0;

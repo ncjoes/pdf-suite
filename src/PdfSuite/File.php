@@ -140,6 +140,13 @@ abstract class File implements FileContract
         return $fs->move($this->path(), $new_path);
     }
 
+    public function copyTo($new_path)
+    {
+        $fs = $this->filesystem();
+
+        return $fs->copy($this->path(), $new_path);
+    }
+
     public function save()
     {
         $status = !is_file($this->path()) ? false : self::filesystem()->put($this->path(), $this->get(), true);

@@ -191,7 +191,7 @@ class PdfToHtml extends PopplerUtil
     protected function relocateSinglePageToParentDir(Directory $directory)
     {
         foreach ($directory->getItems() as $file) {
-            $file->moveTo($directory->parentDirectory());
+            $file->moveTo($directory->parentDirectory().C::DS.$file->basename());
         }
         $directory->delete();
     }

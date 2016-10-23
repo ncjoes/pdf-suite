@@ -27,6 +27,8 @@ interface FileContract
 
     public function moveTo($new_path);
 
+    public function copyTo($new_path);
+
     public function save();
 
     public function saveAs($new_path);
@@ -38,6 +40,5 @@ interface FileContract
     public function append($contents);
 
     public function prepend($contents);
-
 
 }
