@@ -112,4 +112,22 @@ class PdfInfo extends PopplerUtil
     {
         return $this->util()->getPdfVersion();
     }
+
+    public function getPageOrientation()
+    {
+        $width = $this->getPageWidth();
+        $height = $this->getPageHeight();
+        if ($width and $height) {
+            $ratio = $width / $height;
+
+            if ($ratio > 1.1)
+                return 'L';
+            elseif ($ratio < 0.9)
+                return 'P';
+            else
+                return 'S';
+        }
+
+        return null;
+    }
 }
