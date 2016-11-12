@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "11092ef3685c6befc351420535691b17",
-    "content-hash": "f0bef3c537481436b16daa79da6f9237",
+    "hash": "267418c9e8290b17e9f0e852da7c3bce",
+    "content-hash": "96fca9e3602bfe7d25c2d65e9f31e62d",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -270,16 +270,16 @@
         },
         {
             "name": "ncjoes/poppler-php",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ncjoes/poppler-php.git",
-                "reference": "53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c"
+                "reference": "416547d974e8c0410748af626aaf6d61dd019816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ncjoes/poppler-php/zipball/53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c",
-                "reference": "53a85cf3f66f2bcf3ad2fd1bc9f7e98a504f395c",
+                "url": "https://api.github.com/repos/ncjoes/poppler-php/zipball/416547d974e8c0410748af626aaf6d61dd019816",
+                "reference": "416547d974e8c0410748af626aaf6d61dd019816",
                 "shasum": ""
             },
             "require": {
@@ -318,20 +318,20 @@
                 "Poppler-utils",
                 "pdf"
             ],
-            "time": "2016-10-17 04:06:24"
+            "time": "2016-10-18 16:53:23"
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.2",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
+                "reference": "a9b97968bcde1c4de2a5ec6cbd06a0f6c919b46e",
                 "shasum": ""
             },
             "require": {
@@ -366,11 +366,11 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-11-07 23:38:38"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -423,16 +423,16 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "bb7395e8b1db3654de82b9f35d019958276de4d7"
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/bb7395e8b1db3654de82b9f35d019958276de4d7",
-                "reference": "bb7395e8b1db3654de82b9f35d019958276de4d7",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/59eee3c76eb89f21857798620ebdad7a05ad14f4",
+                "reference": "59eee3c76eb89f21857798620ebdad7a05ad14f4",
                 "shasum": ""
             },
             "require": {
@@ -475,11 +475,11 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-05 08:37:39"
+            "time": "2016-10-18 15:46:07"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -643,16 +643,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.4",
+            "version": "1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
+                "reference": "399c1f9781e222f6eb6cc238796f5200d1b7f108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
-                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/399c1f9781e222f6eb6cc238796f5200d1b7f108",
+                "reference": "399c1f9781e222f6eb6cc238796f5200d1b7f108",
                 "shasum": ""
             },
             "require": {
@@ -681,7 +681,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-16 13:37:59"
+            "time": "2016-10-31 17:19:45"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -893,16 +893,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3"
+                "reference": "6cba06ff75a1a63a71033e1a01b89056f3af1e8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5f3f7e736d6319d5f1fc402aff8b026da26709a3",
-                "reference": "5f3f7e736d6319d5f1fc402aff8b026da26709a3",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6cba06ff75a1a63a71033e1a01b89056f3af1e8d",
+                "reference": "6cba06ff75a1a63a71033e1a01b89056f3af1e8d",
                 "shasum": ""
             },
             "require": {
@@ -952,7 +952,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-07-26 14:39:29"
+            "time": "2016-11-01 05:06:24"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1792,16 +1792,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3"
+                "reference": "7ff51b06c6c3d5cc6686df69004a42c69df09e27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/368b9738d4033c8b93454cb0dbd45d305135a6d3",
-                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7ff51b06c6c3d5cc6686df69004a42c69df09e27",
+                "reference": "7ff51b06c6c3d5cc6686df69004a42c69df09e27",
                 "shasum": ""
             },
             "require": {
@@ -1837,7 +1837,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-25 08:27:07"
+            "time": "2016-10-24 18:41:13"
         },
         {
             "name": "webmozart/assert",
