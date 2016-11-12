@@ -159,7 +159,7 @@ class Directory implements FileContract
 
             return $this;
         }
-        throw new Exception('Supplied path does not point to a directory');
+        throw new PdfSuiteException('Supplied path does not point to a directory');
     }
 
     protected function items()
@@ -174,9 +174,11 @@ class Directory implements FileContract
 
     public function refresh()
     {
-        foreach ($this->files as $file) {
-            if (!$this->filesystem()->exists($file->path()))
-                $this->files->offsetUnset($file->hash());
+        if ($this->files) {
+            foreach ($this->files as $file) {
+                if (!$this->filesystem()->exists($file->path()))
+                    $this->files->offsetUnset($file->hash());
+            }
         }
 
         $sub_directories = $this->filesystem()->directories($this->path());
@@ -208,7 +210,7 @@ class Directory implements FileContract
             return $file;
         }
 
-        throw new Exception('Index not found: '.$hash);
+        throw new PdfSuiteException('Index not found: '.$hash);
     }
 
     public function getItem($hash)

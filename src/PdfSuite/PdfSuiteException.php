@@ -9,7 +9,7 @@
 
 namespace NcJoes\PdfSuite;
 
-class Exception extends \Exception
+class PdfSuiteException extends \Exception
 {
 
 }

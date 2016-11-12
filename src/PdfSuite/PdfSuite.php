@@ -71,7 +71,7 @@ class PdfSuite
 
             return $this;
         }
-        throw new Exception("File not found :".$pdfFile);
+        throw new PdfSuiteException("File not found :".$pdfFile);
     }
 
     public function outputDir($dir = '')

@@ -11,7 +11,7 @@ namespace NcJoes\PdfSuite\Utils;
 
 use NcJoes\PdfSuite\Config;
 use NcJoes\PdfSuite\Directory;
-use NcJoes\PdfSuite\Exception;
+use NcJoes\PdfSuite\PdfSuiteException;
 use NcJoes\PdfSuite\PdfSuite;
 use NcJoes\PopplerPhp\PopplerUtil as PopplerPhpUtil;
 
@@ -71,7 +71,7 @@ abstract class PopplerUtil
     {
         $num_pages = (int)$this->pdfInfo()->getNumOfPages();
         if ($start > $stop or $start > $num_pages) {
-            throw new Exception(
+            throw new PdfSuiteException(
                 "Invalid page range: start page of -{$start}- is either greater than 
                 stop page -{$stop}- or greater number of pages in document -{$num_pages}-");
         }

@@ -45,7 +45,7 @@ abstract class File implements FileContract
 
             return $this;
         }
-        throw new Exception('Supplied path does not point to an existing file');
+        throw new PdfSuiteException('Supplied path does not point to an existing file');
     }
 
     public static function make($path)
@@ -55,7 +55,7 @@ abstract class File implements FileContract
 
             return new $class($path);
         }
-        throw new Exception('Supplied path does not point to a file: '.$path);
+        throw new PdfSuiteException('Supplied path does not point to a file: '.$path);
     }
 
     public static function getFileClass($path)
