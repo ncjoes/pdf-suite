@@ -14,7 +14,7 @@ class PdfToJpegConverterTest extends PdfSuiteTestBase
     public function testPdfToJpegConverter()
     {
         $converter = $this->suite->getPdfToJpegConverter();
-        $converter->setPageRange(15, 33);
-        $this->assertEquals(33-14, $converter->convert()->getItems()->count());
+        $converter->setPageRange(1, 16);
+        $this->assertEquals(16, $converter->convert()->getItems()->count());
     }
 }

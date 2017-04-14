@@ -14,7 +14,7 @@ class PdfToPngConverterTest extends PdfSuiteTestBase
     public function testPdfToPngConverter()
     {
         $converter = $this->suite->getPdfToPngConverter();
-        $converter->setPageRange(20, 33);
-        $this->assertEquals(33-19, $converter->convert()->getItems()->count());
+        $converter->setPageRange(1, 16);
+        $this->assertEquals(16, $converter->convert()->getItems()->count());
     }
 }

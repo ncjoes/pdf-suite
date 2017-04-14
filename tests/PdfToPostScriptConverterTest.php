@@ -14,7 +14,7 @@ class PdfToPostScriptConverterTest extends PdfSuiteTestBase
     public function testPdfToPsConverter()
     {
         $converter = $this->suite->getPdfToPsConverter();
-        $converter->setPageRange(15, 33);
-        $this->assertEquals(33-14, $converter->convert()->getItems()->count());
+        $converter->setPageRange(1, 16);
+        $this->assertEquals(17, $converter->convert()->getItems()->count());
     }
 }

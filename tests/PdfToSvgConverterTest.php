@@ -14,8 +14,8 @@ class PdfToSvgConverterTest extends PdfSuiteTestBase
     public function testPdfToSvgConverter()
     {
         $converter = $this->suite->getPdfToSvgConverter();
-        $converter->setPageRange(18, 33);
+        $converter->setPageRange(1, 12);
         $directory = $converter->convert();
-        $this->assertEquals(33-17, $directory->getItems()->count());
+        $this->assertEquals(13, $directory->getItems()->count());
     }
 }
