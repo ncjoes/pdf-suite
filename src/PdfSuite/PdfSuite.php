@@ -76,7 +76,7 @@ class PdfSuite
 
     public function outputDir($dir = '')
     {
-        if (!empty($dir) or $dir == C::DEFAULT) {
+        if (!empty($dir)) {
             Config::setOutputDirectory($dir);
 
             return $this;
